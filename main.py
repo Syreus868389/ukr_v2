@@ -3,4 +3,7 @@ import pandas as pd
 
 corpus = {}
 
-tweets = fetcher("ukraine zelensky putin nuclear", date_from="2022-10-01", date_to="2022-10-18", date_interval=3)
+query = "zelensky"
+languages = ['fr','ru']
+
+tweets = fetcher(query, date_from="2022-06-01", date_to="2022-10-30", date_interval=3, languages=languages)

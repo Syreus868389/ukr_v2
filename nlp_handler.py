@@ -23,15 +23,16 @@ def cleaner(text, lang):
     return clean_text.lower()
 
 
-class TweetHandler:
-    def __init__(self, tweet_text, lang="fr"):
-        self.text = cleaner(tweet_text)
+class NLPHandler:
+    def __init__(self, text, lang="fr"):
+        self.text = cleaner(text)
 
         if lang == "fr":
             self.nlp = spacy.load("fr_dep_news_trf")
         elif lang == "en":
             self.nlp = spacy.load("en_core_web_trf")
 
+        self.nlp.add_pipe("experimental_coref", config=config)
         self.doc = self.nlp(self.text)
         
         return self.doc
@@ -40,35 +41,10 @@ class TweetHandler:
         self.tokens = [token for token in self.doc if token.text not in self.nlp.Defaults.stop_words]
 
         return self.tokens
-
-    def get_processed_tokens(self):
-        self.processed_tokens = []
-        for chunk in self.doc.noun_chunks:
-            for token in chunk:
-                token_content = TokenHandler(chunk, token)
-                self.processed_tokens.append(token_content)
-
-        return self.processed_tokens   
-
-
-class TokenHandler:
-    def __init__(self, chunk, token):
-        self.chunk = chunk
-        self.text = token.text
-        self.token = token
         
+    def get_clusters(self):
 
-def clusters(text, lang="fr"):
-    if lang == "fr":
-            nlp = spacy.load("fr_dep_news_trf", disable=["tagger", "attribute_ruler", "lemmatizer","ner"])
-    elif lang == "en":
-        nlp = spacy.load("en_core_web_trf")
-
-    nlp.add_pipe("experimental_coref", config=config)
-
-    doc = nlp(doc)
-
-    return doc.spans["coref_clusters"]
+        return self.doc.spans["coref_clusters"]
 
 
 

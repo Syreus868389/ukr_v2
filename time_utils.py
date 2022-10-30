@@ -17,7 +17,7 @@ def resolve_interval(start: str, end: str, portion_size: int):
     eq = Eq(delta_days/x, portion_size)
     solution = solve(eq, x)
     interval = solution[0]
-    print(interval)
+
     chunk = delta/float(interval)
     
     for i in range(ceil(interval)):
