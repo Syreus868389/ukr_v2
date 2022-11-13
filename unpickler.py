@@ -9,9 +9,7 @@ def unpickle_corpus(filename):
             except EOFError:
                 break
 
-    tweets_corpus = list(loadall('corpus_en_ukraine_zelensky_putin_nuclear.pickle'))
-
-    tweets = list(itertools.chain.from_iterable(tweets_corpus))
-
-    return tweets
+#tweets_corpus = list(unpickle_corpus('corpus_en_zelensky.pickle'))
+#
+#tweets = list(itertools.chain.from_iterable(tweets_corpus))
 
