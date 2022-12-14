@@ -1,3 +1,14 @@
 /.venv
 /.vscode
 __pycache__
+*.hdf5
+ukr_app
+*.csv
+extract_entities.py
+frequency_map.py
+nlp_handler.py
+nlp_v2.py
+pickle_to_hdf.py
+unpickler.py
+vaex_check.py
+queries.txt
